@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flask combinatorics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="header">
+    <nav class="navbar bg-light">
+        <div class="container-xxl">
+            <a class="navbar-brand a_flex" href="{{ url_for('app_index') }}">
+                <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="GRM LOGO" height="30"
+                     class="d-inline-block align-text-top">
+                <h1>Flask combinatorics</h1>
+            </a>
+        </div>
+    </nav>
+</header>
+
+
+<section class="main">
+
+    <div id="carouselExampleFade" class="carousel carousel-dark slide carousel-fade" data-bs-ride="carousel"
+         data-interval="false">
+        <div class="carousel-inner container-xxl">
+            <div class="carousel-item active">
+                <div class="slide slide_1">
+                    <h2>
+                        Комбинаторика
+                    </h2>
+                    <p>
+                        <mark>Комбинато́рика (иногда называемая комбинаторным анализом)</mark>
+                        — раздел математики,
+                        посвящённый решению задач, связанных с <strong>выбором и расположением элементов</strong>
+                        некоторого
+                        (чаще всего конечного) множества в соответствии с заданными правилами.
+                        Каждое такое правило определяет некоторую выборку из элементов исходного множества,
+                        которая называется комбинаторной конфигурацией. Простейшими примерами комбинаторных
+                        конфигураций являются <strong>перестановки</strong>, <strong>сочетания</strong> и <strong>размещения</strong>.
+                    </p>
+                    <p>
+                        Подробнее - смотри на <a
+                            href="https://ru.wikipedia.org/wiki/%D0%9A%D0%BE%D0%BC%D0%B1%D0%B8%D0%BD%D0%B0%D1%82%D0%BE%D1%80%D0%B8%D0%BA%D0%B0">Википедии</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="slide slide_1">
+                    <h2>
+                        Количество перестановок всех элементов без повторений
+                    </h2>
+                    <p>
+                        <mark>Все возможные варианты перестановок без повторений</mark>
+                        -
+                        Вычисляется с помощью факториала от количества элементов последовательности.
+                        Количество элементов генерируемой последовательности равно количеству исходной.
+                    </p>
+                    <hr>
+                    <h2>
+                        Исходная последовательность
+                    </h2>
+                    <div class="balls">
+
+                        {% for element in app_page.slide2.seq %}
+                            <div class="ball">{{ element }}</div>
+                        {% endfor %}
+                    </div>
+                    <hr>
+                    <h2>Все возможные варианты перестановок без повторений:</h2>
+                    {% for seq in app_page.slide2.permutations %}
+                        <div class="balls">
+                            {% for element in seq %}
+                                <div class="ball">{{ element }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="slide slide_1">
+                    <h2>
+                        Количество перестановок части элементов последовательности без повторений
+                    </h2>
+                    <p>
+                        <mark>Все возможные варианты перестановок части последовательности без повторений</mark>
+                        -
+                        Вычисляется с помощью факториала от количества элементов последовательности, деленного
+                        на факториал разницы количества исходной последовательности и генерируемой.
+                        Количество элементов генерируемой последовательности всегда меньше количества исходной.
+                    </p>
+                    <hr>
+                    <h2>
+                        Исходная последовательность
+                    </h2>
+                    <div class="balls">
+
+                        {% for element in app_page.slide3.seq %}
+                            <div class="ball">{{ element }}</div>
+                        {% endfor %}
+                    </div>
+                    <hr>
+                    <h2>Все возможные варианты перестановок без повторений:</h2>
+                    {% for seq in app_page.slide3.permutations %}
+                        <div class="balls">
+                            {% for element in seq %}
+                                <div class="ball">{{ element }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="slide slide_1">
+                    <h2>
+                        Количество размещений с повторениями
+                    </h2>
+                    <p>
+                        <mark>Все возможные варианты перестановок части последовательности с повторениями</mark>
+                        -
+                        Вычисляется с помощью возведения количества элементов исходной последовательности
+                        в степень требуемого количества генерируемой.
+                        Количество элементов генерируемой последовательности всегда меньше количества исходной.
+                    </p>
+                    <hr>
+                    <h2>
+                        Исходная последовательность.
+                    </h2>
+                    <div class="balls">
+
+                        {% for element in app_page.slide4.seq %}
+                            <div class="ball">{{ element }}</div>
+                        {% endfor %}
+                    </div>
+                    <hr>
+                    <h2>Все возможные варианты размещений с повторениями:</h2>
+                    {% for seq in app_page.slide4.product %}
+                        <div class="balls">
+                            {% for element in seq %}
+                                <div class="ball">{{ element }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="slide slide_1">
+                    <h2>
+                        Количество сочетаний без повторений
+                    </h2>
+                    <p>
+                        <mark>
+                            Все возможные варианты перестановок части последовательности без повторений
+                            и с разными элементами
+                        </mark>
+                        -
+                        Вычисляется с помощью факториала от количества элементов последовательности, деленного
+                        на произведение (факториала разницы количества исходной последовательности и генерируемой)
+                        и факториала количества генерируемой последовательности.
+                        Количество элементов генерируемой последовательности всегда меньше количества исходной.
+                    </p>
+                    <hr>
+                    <h2>
+                        Исходная последовательность.
+                    </h2>
+                    <div class="balls">
+
+                        {% for element in app_page.slide5.seq %}
+                            <div class="ball">{{ element }}</div>
+                        {% endfor %}
+                    </div>
+                    <hr>
+                    <h2>Все возможные варианты сочетаний без повторений:</h2>
+                    {% for seq in app_page.slide5.combinations %}
+                        <div class="balls">
+                            {% for element in seq %}
+                                <div class="ball">{{ element }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="slide slide_1">
+                    <h2>
+                        Количество сочетаний с повторениями
+                    </h2>
+                    <p>
+                        <mark>
+                            Все возможные варианты перестановок части последовательности с повторениями
+                            и разными элементами
+                        </mark>
+                        -
+                        Вычисляется с помощью факториала от (суммы количества элементов последовательности и количества
+                        требуемой генерируемой последовательности за минусом единицы), деленного
+                        на произведение (факториала разницы количества исходной последовательности и единицы)
+                        и факториала количества генерируемой последовательности.
+                        Количество элементов генерируемой последовательности всегда меньше количества исходной.
+                    </p>
+                    <hr>
+                    <h2>
+                        Исходная последовательность.
+                    </h2>
+                    <div class="balls">
+
+                        {% for element in app_page.slide6.seq %}
+                            <div class="ball">{{ element }}</div>
+                        {% endfor %}
+                    </div>
+                    <hr>
+                    <h2>Все возможные варианты сочетаний с повторениями:</h2>
+                    {% for seq in app_page.slide6.combinations_with_replacement %}
+                        <div class="balls">
+                            {% for element in seq %}
+                                <div class="ball">{{ element }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="slide slide_1">
+                    <h2>
+                        Ссылка на проект
+                    </h2>
+                    <p>
+                        <a href="https://github.com/golosovsa/sky.pro-conference-combinatorics">GRM GitHub</a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+</section>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+</body>
+</html>
